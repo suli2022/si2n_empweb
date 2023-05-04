@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" 
     content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Emp</title>
     <link rel="stylesheet" href="bootstrap.css">
     <link rel="stylesheet" href="style.css">
 
@@ -13,6 +13,23 @@
         
         <div class="container">
             <h1>Sablon</h1>
+
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-primary" 
+            data-bs-toggle="modal" 
+            data-bs-target="#operatorModal">
+                Hozzáad
+            </button>
+
+
+            <!-- Login Button trigger modal -->
+            <button type="button" class="btn btn-primary" 
+            data-bs-toggle="modal" 
+            data-bs-target="#loginModal">
+                Belépés
+            </button>
+
+
             <table class="table table-striped">
                 <thead>
                     <tr>
@@ -27,6 +44,106 @@
         </div>
 
 
-    <script src="app.js"></script>  
+
+        
+
+  
+  <!-- Operátor Modal -->
+  <div class="modal fade" id="operatorModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="operatorModalLabel">Hozzáadás</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          
+
+
+            <div>
+                <div class="mb-3">
+                  <label for="id" class="form-label">Azonosító</label>
+                  <input type="text" class="form-control" id="id">
+                </div>
+                <div class="mb-3">
+                  <label for="name" class="form-label">Név</label>
+                  <input type="text" class="form-control" id="name">
+                </div>
+                <div class="mb-3">
+                  <label for="city" class="form-label">Település</label>
+                  <input type="text" class="form-control" id="city">
+                </div>
+                <div class="mb-3">
+                  <label for="salary" class="form-label">Fizetés</label>
+                  <input type="text" class="form-control" id="salary">
+                </div>
+            </div>
+
+
+
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" 
+          class="btn btn-secondary" 
+          data-bs-dismiss="modal">Bezárás</button>
+          
+          <button type="button" 
+          class="btn btn-primary"
+          id="operatorButton"
+          >
+            Mentés
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>  <!-- Operátor Modal vége -->      
+
+
+
+
+  
+  <!-- Login Modal -->
+  <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Belépés</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          
+          
+          
+            <div>
+                <div class="mb-3">
+                  <label for="user" class="form-label">Felhasználónév</label>
+                  <input type="text" class="form-control" id="user">
+                </div>
+                <div class="mb-3">
+                  <label for="pass" class="form-label">Jelszó</label>
+                  <input type="password" class="form-control" id="pass">
+                </div>
+            </div>          
+
+
+
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" 
+          data-bs-dismiss="modal">Bezár</button>
+          <button type="button" class="btn btn-primary">
+            Belépés
+            </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+    <script src="bootstrap.js"></script>
+    <script src="app.js"></script>
 </body>
 </html>
