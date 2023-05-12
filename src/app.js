@@ -16,6 +16,7 @@ const doc = {
 
 const state = {
     employees: [],
+    employee: null,
     host: 'http://localhost:8000/api/',
     logedin: false,
     adding: true
@@ -35,14 +36,44 @@ function init() {
         startLogin();
     });
     changeVisible()
-    // getEmployees()    
+    getEmployees()    
 }
 
 function startOperation() {
-    console.log('működik')
-    let employee = {
-        // name: doc.
-    }
+    console.log('Hozzáadás...')
+    state.employee = {
+        name: doc.nameInput.value,
+        city: doc.cityInput.value,
+        salary: doc.salaryInput.value
+    };
+    createEmployee();
+}
+
+function createEmployee() {
+    let endpoint = 'employees';
+    let url = state.host + endpoint;
+    let token = localStorage.getItem('token');
+    fetch(url, {
+        method: 'post',
+        body: JSON.stringify(state.employee),
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization':'Bearer ' + token
+        }
+    })
+    .then(response => response.json())
+    .then(result => {
+        console.log(result);
+        clearField();
+        getEmployees();
+    });
+}
+
+function clearField() {
+    doc.idInput.value = '';
+    doc.nameInput.value = '';
+    doc.cityInput.value = '';
+    doc.salaryInput.value = '';
 }
 
 function startLogin() {
@@ -121,8 +152,51 @@ function renderTable() {
                 <td>${emp.name}</td>
                 <td>${emp.city}</td>
                 <td>${emp.salary}</td>
+                <td>
+                    <button 
+                        class="btn btn-primary"
+                        onclick="startDelete(${emp.id})">Törlés</button>
+                </td>
+                <td>
+                    <button 
+                        class="btn btn-primary"
+                        onclick="startEdit()"
+                        data-id="${emp.id}"
+                        data-name="${emp.name}"
+                        data-city="${emp.city}"
+                        data-salary="${emp.salary}"
+                        >Szerkesztés</button>
+                </td>
+
             </tr>
         `
     });
     doc.tbody.innerHTML = rows;
+}
+
+function startDelete(id) {
+    console.log('Törlés ...');
+    deleteEmployee(id)
+}
+
+function deleteEmployee(id) {
+    let endpoint = 'employees';
+    let url = state.host + endpoint + "/" + id;
+    let token = localStorage.getItem('token');
+    fetch(url, {
+        method: 'delete',
+        headers: {
+            'Authorization':'Bearer ' + token
+        }
+    })
+    .then(response => response.json())
+    .then(result => {
+        console.log(result)
+        getEmployees();
+    });
+}
+
+function startEdit() {
+    console.log('Szerkesztés...')
+    console.log(state.employee.name)
 }
